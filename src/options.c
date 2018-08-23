@@ -23,7 +23,7 @@
 #include "chilli_module.h"
 #endif
 
-void options_init() {
+void options_init(void) {
   memset(&_options, 0, sizeof(_options));
 }
 
@@ -337,9 +337,6 @@ int options_fromfd(int fd, bstring bt) {
 #ifdef HAVE_NETFILTER_COOVA
   if (!option_s_l(bt, &o.kname)) return 0;
 #endif
-#ifdef ENABLE_DNSLOG
-  if (!option_s_l(bt, &o.dnslog)) return 0;
-#endif
 #ifdef ENABLE_IPWHITELIST
   if (!option_s_l(bt, &o.ipwhitelist)) return 0;
 #endif
@@ -540,9 +537,6 @@ int options_save(char *file, bstring bt) {
 #ifdef HAVE_NETFILTER_COOVA
   if (!option_s_s(bt, &o.kname)) return 0;
 #endif
-#ifdef ENABLE_DNSLOG
-  if (!option_s_s(bt, &o.dnslog)) return 0;
-#endif
 #ifdef ENABLE_IPWHITELIST
   if (!option_s_s(bt, &o.ipwhitelist)) return 0;
 #endif
@@ -672,12 +666,12 @@ int reload_options(int argc, char **argv) {
   return ok;
 }
 
-void options_destroy() {
+void options_destroy(void) {
   if (_options._data)
     free(_options._data);
 }
 
-void options_cleanup() {
+void options_cleanup(void) {
   char file[128];
 
 #ifdef ENABLE_MODULES
