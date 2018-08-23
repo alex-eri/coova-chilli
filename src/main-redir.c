@@ -508,7 +508,7 @@ check_regex(regex_t *re, char *regex, char *s) {
   syslog(LOG_DEBUG, "Checking %s =~ %s", s, regex);
 #endif
 
-#if defined (__FreeBSD__) || defined (__APPLE__) || defined (__OpenBSD__) || defined (__NetBSD__)
+#if defined (__linux__) || (__FreeBSD__) || defined (__APPLE__) || defined (__OpenBSD__) || defined (__NetBSD__)
   if (!re->re_g)
 #else
     if (!re->allocated)
